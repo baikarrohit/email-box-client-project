@@ -82,7 +82,7 @@ const SignUp = () => {
           </Button>
         </Form>
       </section>
-      <section>
+      <section className={classes.lowersec}>
         <Link to="/login">Have an account? Login</Link>
       </section>
     </div>

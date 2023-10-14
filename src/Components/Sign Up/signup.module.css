@@ -13,3 +13,21 @@
     font-weight: bold;
     margin-bottom: 30px;
 }
+.lowersec {
+  margin: 2rem auto;
+  max-width: 22rem;
+  padding: 2rem;
+  box-shadow: 0 1px 4px rgba(10, 10, 10, 0.1);
+  background-color: #fff;
+  text-align: center;
+}
+.lowersec Link {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: #cbfce7;
+  color: #0c0c0c;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}

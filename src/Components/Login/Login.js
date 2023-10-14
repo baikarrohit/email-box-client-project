@@ -2,10 +2,13 @@ import { useRef } from "react";
 import classes from "./Login.module.css";
 import { Form, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { AuthActions } from "../../Store/auth-slice";
 const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -27,7 +30,7 @@ const Login = () => {
       const data = await res.json();
       if (res.ok) {
         navigate("/profile", { replace: true });
-        console.log("token", data.idToken);
+        dispatch(AuthActions.login({tokenId: data.idToken, email: data.email}))
         console.log("Login Done");
       } else {
         console.log("Authentication Failed!");
