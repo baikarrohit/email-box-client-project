@@ -1,15 +1,21 @@
 import { Route, Routes } from "react-router-dom";
-import Login from "./Components/Login/Login";
-import SignUp from "./Components/Sign Up/SignUp";
-import Profile from "./Components/Profile/Profile";
+import Compose from "./Components/Profile/Compose";
+import RootLayout from "./Components/Layout/root";
+import Authentication from "./Components/Authentication/Authentication";
+import RootLayout2 from "./Components/Layout/root2";
+import Inbox from "./Components/Profile/inbox";
 
 function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<SignUp/>}/>
-        <Route path="/login" element={<Login/>}/>
-        <Route path="/profile" element={<Profile/>}/>
+        <Route index element={<Authentication />} />
+        <Route path="/" element={<RootLayout />}>
+          <Route path="/profile" element={<RootLayout2 />} exact>
+            <Route path="/profile/compose" element={<Compose />} />
+            <Route path="/profile/inbox" element={<Inbox />} />
+          </Route>
+        </Route>
       </Routes>
     </div>
   );

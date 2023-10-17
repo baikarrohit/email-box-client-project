@@ -1,0 +1,12 @@
+
+.inboxCon {
+    width: 100%;
+    border: 1px solid black;
+}
+
+.inboxCon h3{
+    text-align: center;
+    font-family:monospace;
+    font-style: italic;
+    font-weight: 700;
+}
