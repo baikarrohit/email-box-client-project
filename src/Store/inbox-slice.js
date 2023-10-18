@@ -17,26 +17,32 @@ const inboxSlice = createSlice({
       const msgOpen = JSON.stringify(action.payload[1]);
       localStorage.setItem("message open", msgOpen);
     },
+    removeItem(state, action) {
+      const filterItems = state.inboxItems.filter(
+        (ele) => ele[0] !== action.payload[0]
+      );
+      state.inboxItems = filterItems;
+    },
   },
 });
 
 export const inboxActions = inboxSlice.actions;
 
-export const inboxItemFill =(email)=>{
-  return async(dispatch)=>{
-      try{
-          const userEmail = email.replace(/[.@]/g,"");
-          const resInbox = await fetch(
-            `https://email-box-fb572-default-rtdb.firebaseio.com/${userEmail}/recievedemails.json`
-          );
-          const data = await resInbox.json();
-          console.log(data)
-          if(resInbox.ok){
-              dispatch(inboxActions.addItem(Object.entries(data)));
-          }
-      }catch(error){
-          alert(error);
+export const inboxItemFill = (email) => {
+  return async (dispatch) => {
+    try {
+      const userEmail = email.replace(/[.@]/g, "");
+      const resInbox = await fetch(
+        `https://email-box-fb572-default-rtdb.firebaseio.com/${userEmail}/recievedemails.json`
+      );
+      const data = await resInbox.json();
+      console.log(data);
+      if (resInbox.ok) {
+        dispatch(inboxActions.addItem(Object.entries(data)));
       }
-  }
-}
+    } catch (error) {
+      alert(error);
+    }
+  };
+};
 export default inboxSlice.reducer;
