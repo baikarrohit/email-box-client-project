@@ -1,9 +1,10 @@
 import { useRef } from "react";
 import classes from "./Login.module.css";
 import { Form, Button } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { AuthActions } from "../../../Store/auth-slice";
+import { inboxItemFill } from "../../../Store/inbox-slice";
 const Login = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -29,8 +30,9 @@ const Login = () => {
       );
       const data = await res.json();
       if (res.ok) {
-        navigate("/profile/compose", { replace: true });
+        navigate("/profile", { replace: true });
         dispatch(AuthActions.login({tokenId: data.idToken, email: data.email}))
+        dispatch(inboxItemFill(data.email))
         console.log("Login Done");
       } else {
         console.log("Authentication Failed!");
