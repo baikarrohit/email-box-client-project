@@ -3,7 +3,8 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "../Profile/Sidebar";
 import classes from "./root2.module.css";
 
-const RootLayout2 = (props) => {
+
+const Root2Layout = (props) => {
   return (
     <Fragment>
       <div className={classes.root}>
@@ -14,4 +15,4 @@ const RootLayout2 = (props) => {
   );
 };
 
-export default RootLayout2;
+export default Root2Layout;

@@ -36,12 +36,12 @@ export const inboxItemFill = (email) => {
         `https://email-box-fb572-default-rtdb.firebaseio.com/${userEmail}/recievedemails.json`
       );
       const data = await resInbox.json();
-      console.log(data);
+      console.log("inbox render");
       if (resInbox.ok) {
         dispatch(inboxActions.addItem(Object.entries(data)));
       }
     } catch (error) {
-      alert(error);
+      console.log(error);
     }
   };
 };
