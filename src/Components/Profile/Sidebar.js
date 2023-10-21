@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { inboxItemFill } from "../../Store/inbox-slice";
 import classes from "./sidebar.module.css";
+import { SentEmailItemFill } from "../../Store/sentEmail-slice";
 
 const Sidebar = () => {
   const navigate = useNavigate();
   const auth = useSelector((state) => state.auth);
-  const inboxItem = useSelector((state) => state.inbox);
   const dispatch = useDispatch();
   const inboxItems = useSelector((state) => state.inbox.inboxItems);
 
@@ -20,6 +20,12 @@ const Sidebar = () => {
 
     dispatch(inboxItemFill(auth.userEmail));
   };
+
+  const sentemailHandler = () => {
+    navigate("/profile/sentemail", { replace: true });
+    dispatch(SentEmailItemFill(auth.userEmail));
+  };
+
   let totalUnread = 0;
   inboxItems.forEach((ele) => {
     if (ele[1].unread) {
@@ -46,7 +52,9 @@ const Sidebar = () => {
           </tr>
           <tr>
             <td>
-              <Button variant="outline-success">Sent</Button>
+              <Button variant="outline-success" onClick={sentemailHandler}>
+                Sent
+              </Button>
             </td>
           </tr>
           <tr>
