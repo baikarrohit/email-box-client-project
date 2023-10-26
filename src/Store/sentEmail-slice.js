@@ -22,6 +22,9 @@ const SentEmailSlice = createSlice({
       );
       state.sentemailItem = filterItems;
     },
+    onLogoutSentmailNull(state){
+      state.sentemailItem = []
+    }
   },
 });
 
@@ -35,9 +38,10 @@ export const SentEmailItemFill = (email) => {
         `https://email-box-fb572-default-rtdb.firebaseio.com/${useremail}/sentemails.json`
       );
       const data = await res.json();
-      console.log("sentEmail render");
-      if (res.ok) {
+      if (res.ok && data !== null) {
         dispatch(SentEmailActions.addItems(Object.entries(data)));
+      }else{
+        throw new Error('Failed to fecth sent email.')
       }
     } catch (err) {
       console.log(err);

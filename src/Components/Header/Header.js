@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import classes from "./Header.module.css";
 import { useNavigate } from "react-router-dom";
 import { AuthActions } from "../../Store/auth-slice";
+import { inboxActions } from "../../Store/inbox-slice";
+import { SentEmailActions } from "../../Store/sentEmail-slice";
 
 const Header = () => {
   const auth = useSelector((state) => state.auth);
@@ -10,6 +12,8 @@ const Header = () => {
   const navigate = useNavigate();
 
   const logoutHandler = () => {
+    dispatch(inboxActions.onLogoutInboxNull())
+    dispatch(SentEmailActions.onLogoutSentmailNull())
     dispatch(AuthActions.logout());
     navigate("/", { replace: true });
   };
@@ -17,23 +21,23 @@ const Header = () => {
     <Navbar className={classes["bg-body-tertiary"]}>
       <Container>
         <Navbar.Brand href="#home" className={classes.brand}>
-          Metro Mail
+          Gmail
         </Navbar.Brand>
         <Navbar.Toggle />
 
-        {/* <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>
-            Signed in as : <a href="#login">{auth.userEmail}</a>
-          </Navbar.Text>
+        <Navbar.Collapse className="justify-content-end"> 
+          {auth.isLoggedIn && <Navbar.Text>
+            Signed in as : <a href='/profile'>{auth.userEmail.split('@')[0]}</a>
+          </Navbar.Text>}
         </Navbar.Collapse>
 
-        <Button
+        {auth.isLoggedIn && <Button
           variant="warning"
           style={{ marginLeft: "1rem" }}
           onClick={logoutHandler}
         >
           Logout
-        </Button> */}
+        </Button>}
       </Container>
     </Navbar>
   );

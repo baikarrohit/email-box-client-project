@@ -15,6 +15,7 @@ const Compose = () => {
   const [editorState, updateEditorState] = useState(EditorState.createEmpty());
   const auth = useSelector((state) => state.auth);
   const [emptyEmail, setEmptyEmail] = useState();
+  const [successfullySentmail, setSuccessfullySentmail] = useState(false);
 
   const sendEmailHandler = async (event) => {
     event.preventDefault();
@@ -52,6 +53,7 @@ const Compose = () => {
       } else {
         console.log("Email sending failed!");
       }
+      setSuccessfullySentmail(true);
     } catch (err) {
       console.log(err);
     }
@@ -80,14 +82,25 @@ const Compose = () => {
           },
         }
       );
+      if(res.ok){
+        console.log("Recieved email successfully")
+      }else{
+        console.log("failed to recieve mail")
+      }
     } catch (err) {
       console.log(err);
     }
     formRef.current.reset();
     updateEditorState("");
+    setTimeout(() => {
+      setSuccessfullySentmail(false);
+    }, 5000);
   };
   return (
     <section className={classes.form}>
+      {successfullySentmail && (
+        <p style={{ color: "green" }}>successfully sent mail.</p>
+      )}
       <h1>Welcome to Metro mail</h1>
       <Form ref={formRef} onSubmit={sendEmailHandler}>
         <p style={{ color: "red" }}>{emptyEmail}</p>

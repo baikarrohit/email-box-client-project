@@ -31,7 +31,7 @@ const SignUp = () => {
       );
 
       if (res.ok) {
-        console.log("User has successfully signed up.");
+        alert("User has successfully signed up.");
         emailRef.current.value = "";
         passwordRef.current.value = "";
         confirmPasswordRef.current.value = "";

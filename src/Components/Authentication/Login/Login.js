@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import classes from "./Login.module.css";
 import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +10,7 @@ const Login = () => {
   const passwordRef = useRef();
   const navigate = useNavigate();
   const dispatch = useDispatch()
+  const [error,setError] = useState(false);
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -35,8 +36,14 @@ const Login = () => {
         dispatch(inboxItemFill(data.email))
         console.log("Login Done");
       } else {
-        console.log("Authentication Failed!");
+        //console.log("Authentication Failed! Please try again.");
+        setError(true)
+        setTimeout(()=>{
+          setError(false)
+        },2000)
+        
       }
+      
     } catch (err) {
       console.log(err);
     }
@@ -70,7 +77,9 @@ const Login = () => {
             Login
           </Button>
         </Form>
+        {error && <p className={classes.error}>Authentication failed... Please try again.</p>}
       </section>
+      
       {/* <section className={classes.lowersec}>
         <Link to="/">Don't have an account? Sign Up</Link>
       </section> */}

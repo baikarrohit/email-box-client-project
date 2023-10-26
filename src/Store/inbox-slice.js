@@ -23,6 +23,9 @@ const inboxSlice = createSlice({
       );
       state.inboxItems = filterItems;
     },
+    onLogoutInboxNull(state){
+      state.inboxItems = []
+    }
   },
 });
 
@@ -36,9 +39,10 @@ export const inboxItemFill = (email) => {
         `https://email-box-fb572-default-rtdb.firebaseio.com/${userEmail}/recievedemails.json`
       );
       const data = await resInbox.json();
-      console.log("inbox render");
-      if (resInbox.ok) {
+      if (resInbox.ok && data !== null) {
         dispatch(inboxActions.addItem(Object.entries(data)));
+      }else{
+        throw new Error("Failed to fetch inbox")
       }
     } catch (error) {
       console.log(error);

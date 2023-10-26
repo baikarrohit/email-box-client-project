@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { SentEmailActions } from "../../Store/sentEmail-slice";
+import classes from "./sentEmail.module.css";
 
 const SentEmail = () => {
   const navigate = useNavigate();
@@ -28,9 +29,9 @@ const SentEmail = () => {
     }
   };
   return (
-    <section>
+    <section className={classes.mainSec}>
       <h3>Sent Email</h3>
-      <Table>
+      <Table striped hover>
         <thead>
           <tr>
             <th>Reciver</th>
@@ -40,7 +41,11 @@ const SentEmail = () => {
         </thead>
         <tbody>
           {sentemailItem.map((i) => (
-            <tr onClick={() => clickEmailHandler(i)} key={i[0]}>
+            <tr
+              onClick={() => clickEmailHandler(i)}
+              className={i[1].unread ? classes.unreadRow : ""}
+              key={i[0]}
+            >
               <td>To: {i[1].to}</td>
               <td>{i[1].emailSub}</td>
               <td>{i[1].date}</td>
