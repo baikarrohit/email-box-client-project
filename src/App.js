@@ -12,6 +12,7 @@ import SentEmail from "./Components/Profile/SentEmail";
 import { SentEmailItemFill } from "./Store/sentEmail-slice";
 import SentemailMessage from "./Components/Profile/SentemailMessage";
 import Profile from "./Components/Profile/Profile";
+import './App.css';
 
 function App() {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ function App() {
   }, [auth.isLoggedIn, dispatch, auth.userEmail]);
 
   return (
-    <div>
+    <div className="App">
       <Routes>
         <Route path="/" element={<RootLayout />}>
           <Route index element={<Authentication />} />

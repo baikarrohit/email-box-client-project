@@ -101,7 +101,7 @@ const Compose = () => {
       {successfullySentmail && (
         <p style={{ color: "green" }}>successfully sent mail.</p>
       )}
-      <h1>Welcome to Metro mail</h1>
+      <h1>Welcome to Gmail</h1>
       <Form ref={formRef} onSubmit={sendEmailHandler}>
         <p style={{ color: "red" }}>{emptyEmail}</p>
         <InputGroup className={classes.mail}>
